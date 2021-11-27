@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { Text, View, Button, TextInput } from 'react-native';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase/firebase';
+import { login } from '../firebase/firebase';
 import tw from 'tailwind-react-native-classnames';
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onHandleLogin = () => {
+  const onLogin = () => {
     if (email !== '' && password !== '') {
-      signInWithEmailAndPassword(auth, email, password)
+      login(email, password)
         .then(() => console.log('Login success'))
         .catch(err => console.log(`Login err: ${err}`));
     }
@@ -23,7 +22,7 @@ export default function Login({ navigation }) {
             px-6 py-10 sm:px-10 sm:py-6 
             bg-white rounded-lg shadow-md lg:shadow-lg`}>
           <Text style={tw`text-center font-semibold text-3xl lg:text-4xl text-gray-800 mb-8`}>Stranger Chat</Text>
- 
+
           <View style={tw` py-2`}>
             <View style={tw`block text-xs font-semibold text-gray-400 uppercase`}>E-mail</View>
 
@@ -60,7 +59,7 @@ export default function Login({ navigation }) {
 
           </View>
           <View style={tw`block w-full   p-2 mt-5 `}>
-            <Button onPress={onHandleLogin} color='#1976D2' title='Login' />
+            <Button onPress={onLogin} color='#1976D2' title='Login' />
           </View>
           <View style={tw`block w-full  p-2`}>
             <Button

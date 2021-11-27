@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { Text, View, Button, TextInput } from 'react-native';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase/firebase';
+import {signup} from '../firebase/firebase';
 import tw from 'tailwind-react-native-classnames';
 
 export default function Signup({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onHandleSignup = () => {
+  const onSignup = () => {
     if (email !== '' && password !== '') {
-      createUserWithEmailAndPassword(auth, email, password)
+      signup(email, password)
         .then(() => console.log('accoutn created success'))
         .catch(err => console.log(`Login err: ${err}`));
     }
@@ -60,7 +59,7 @@ export default function Signup({ navigation }) {
             />
           </View>
           <View style={tw`block w-full   p-2 mt-5 `}>
-            <Button onPress={onHandleSignup} title='Create' />
+            <Button onPress={onSignup} title='Create' />
           </View>
           <View style={tw`block w-full  p-2`}>
             <Button
